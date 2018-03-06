@@ -4,4 +4,8 @@ import com.cn.netdisk.entity.User;
 
 public interface UserService {  
     public User getUserById(Long userId);
+
+	public Long addUser(String username, String password, String mail);
+
+	public int checkUsername(String username);
 } 

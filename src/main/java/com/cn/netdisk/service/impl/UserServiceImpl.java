@@ -14,6 +14,15 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;  
     public User getUserById(Long userId) {  
         return this.userDao.selectByPrimaryKey(userId);  
-    }  
+    }
+	@Override
+	public Long addUser(String username, String password, String mail) {
+		User user = new User(username,password,mail);
+		return this.userDao.addUser(user);
+	}
+	@Override
+	public int checkUsername(String username) {
+		return this.userDao.checkUsername(username);
+	}  
   
 }  
