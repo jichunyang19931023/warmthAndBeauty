@@ -1,5 +1,7 @@
 package com.cn.netdisk.dao;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.cn.netdisk.entity.User;
 
 public interface UserDao {
@@ -17,4 +19,6 @@ public interface UserDao {
     int updateByPrimaryKey(User record);
     //检测用户名重复性
 	int checkUsername(String username);
+	
+	User loginCheck(@Param("username") String username,@Param("pwdMd5") String pwdMd5);
 }

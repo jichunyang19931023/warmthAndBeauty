@@ -23,7 +23,7 @@
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-	
+
 	<!-- 跨域处理过滤器 -->
 	<filter>
 		<filter-name>cors</filter-name>
@@ -33,7 +33,21 @@
 		<filter-name>cors</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-	
+
+	<!-- 登录过滤器 -->
+	<filter>
+		<filter-name>login</filter-name>
+		<filter-class>com.cn.netdisk.util.loginFilter</filter-class>
+		<init-param>
+			<param-name>excludedPages</param-name>
+			<param-value>/user/login,/index.jsp,/user/checkUsername,/user/register</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>login</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
 	<!-- Spring监听器 -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>

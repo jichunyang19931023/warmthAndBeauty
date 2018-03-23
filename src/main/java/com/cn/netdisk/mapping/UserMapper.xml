@@ -26,6 +26,12 @@
 		select count(*) from user
 		where name = #{username}
 	</select>
+	
+	<select id="loginCheck"  resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select id from user
+		where name = #{username} and password = #{pwdMd5}
+	</select>
 
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
 		delete from user

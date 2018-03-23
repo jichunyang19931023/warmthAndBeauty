@@ -8,4 +8,6 @@ public interface UserService {
 	public Long addUser(String username, String password, String mail);
 
 	public int checkUsername(String username);
+
+	public User loginCheck(String username, String pwdMd5);
 } 
