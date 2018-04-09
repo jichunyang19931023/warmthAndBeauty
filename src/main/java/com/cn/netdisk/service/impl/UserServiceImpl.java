@@ -27,6 +27,5 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User loginCheck(String username, String pwdMd5) {
 		return this.userDao.loginCheck(username, pwdMd5);
-	}  
-  
+	}
 }  

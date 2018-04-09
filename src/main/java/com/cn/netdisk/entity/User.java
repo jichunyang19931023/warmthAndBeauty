@@ -15,6 +15,10 @@ public class User {
     private Date createTime;
 
     private Integer deleteFlag;
+    
+    private String mail;
+    
+    private String image;
 
     public Long getId() {
         return id;
@@ -64,6 +68,22 @@ public class User {
         this.deleteFlag = i;
     }
     
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+    
     public User(){
     	super();
     }
@@ -74,5 +94,7 @@ public class User {
     	this.roleType = 1;
     	this.createTime = new Date();
     	this.deleteFlag = 0;
+    	this.image = "";
+    	this.mail = mail;
     }
 }
