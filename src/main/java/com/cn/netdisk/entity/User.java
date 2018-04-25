@@ -88,7 +88,8 @@ public class User {
     	super();
     }
     
-    public User(String name, String pwd, String mail){
+    public User(String image, String name, String pwd, String mail){
+    	this.image = image;
     	this.name = name;
     	this.password = pwd;
     	this.roleType = 1;

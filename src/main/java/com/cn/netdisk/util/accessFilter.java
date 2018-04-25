@@ -11,6 +11,7 @@ public class accessFilter implements Filter {
 
 	public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
 			throws IOException, ServletException {
+		servletRequest.setCharacterEncoding("utf-8");
 		HttpServletResponse response = (HttpServletResponse) servletResponse;
 		String origin = servletRequest.getRemoteHost() + ":" + servletRequest.getRemotePort();
 		response.setHeader("Access-Control-Allow-Origin", "*");

@@ -35,13 +35,14 @@ public class UserController {
 	@RequestMapping("/register")
 	public ResultInfo addUser(HttpServletRequest request) {
 		ResultInfo result = new ResultInfo();
+		String image = request.getParameter("image");
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		String mail = request.getParameter("mail");
 
 		try {
 			String pwdMd5 = Md5.md5(password, "jcy");
-			Long userId = this.userService.addUser(username, pwdMd5, mail);
+			Long userId = this.userService.addUser(image, username, pwdMd5, mail);
 			User user = this.userService.getUserById(userId);
 			result.setCode(200);
 			result.setInfo(user);
@@ -66,12 +67,14 @@ public class UserController {
 				// 将登录信息保存到cookie和redis缓存
 				UUID uuid = UUID.randomUUID();
 				String key = "userInfo" + uuid + "-" + user.getId() + "-" + username;
-				key = URLEncoder.encode(key, "gbk");
+				
+				// 保存到redis缓存
+				redisTemplate.opsForValue().set(key, username, 60 * 60 * 30);
+				
+				key = URLEncoder.encode(key, "UTF-8");
 				Cookie cookie = new Cookie("userInfo", key);
 				cookie.setPath("/");
 				response.addCookie(cookie);
-				// 保存到redis缓存
-				redisTemplate.opsForValue().set(key, username, 60 * 60 * 30);
 
 				JSONObject json = new JSONObject();
 				json.put("name", username);
@@ -123,7 +126,6 @@ public class UserController {
 				}
 			}
 		}
-		logger.info(redisUserInfo + "==========");
 		redisTemplate.delete(redisUserInfo);
 		result.setCode(200);
 		return result;

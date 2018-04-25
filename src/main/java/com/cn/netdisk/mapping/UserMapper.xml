@@ -45,10 +45,10 @@
 			order="AFTER">
 			SELECT LAST_INSERT_ID()
 		</selectKey>
-		insert into user (name, password, role_type,create_time, delete_flag)
+		insert into user (name, password, role_type,create_time, delete_flag,image)
 		values (#{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
 		#{roleType,jdbcType=TINYINT},#{createTime,jdbcType=TIMESTAMP},
-		#{deleteFlag,jdbcType=TINYINT})
+		#{deleteFlag,jdbcType=TINYINT},#{image,jdbcType=VARCHAR})
 	</insert>
 
 	<insert id="insertSelective" parameterType="com.cn.netdisk.entity.User">
