@@ -1,6 +1,8 @@
-package com.cn.netdisk.entity;
+package com.cn.beauty.entity;
 
 import java.util.Date;
+
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 public class User {
 
@@ -8,12 +10,14 @@ public class User {
 
     private String name;
 
+    @JsonIgnore
     private String password;
 
     private Integer roleType;
 
     private Date createTime;
-
+    
+    @JsonIgnore
     private Integer deleteFlag;
     
     private String mail;
@@ -95,7 +99,6 @@ public class User {
     	this.roleType = 1;
     	this.createTime = new Date();
     	this.deleteFlag = 0;
-    	this.image = "";
     	this.mail = mail;
     }
 }

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.beauty.dao.ArticleDao" >
+  <resultMap id="BaseResultMap" type="com.cn.beauty.entity.Article" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="abs" property="abs" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="DATE" />
+    <result column="update_time" property="updateTime" jdbcType="DATE" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER" />
+  </resultMap>
+  
+  <resultMap id="ResultMapWithBLOBs" type="com.cn.beauty.entity.Article" extends="BaseResultMap" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  
+  <resultMap id="ArticleMap" type="com.cn.beauty.entity.Article"  extends="BaseResultMap">
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+    <collection property="user" ofType="com.cn.beauty.entity.User" column="user_id">
+		<result property="name" column="name"/>
+	</collection>
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    id, title, abs, create_time, update_time, user_id, delete_flag
+  </sql>
+  <sql id="Blob_Column_List" >
+    content
+  </sql>
+  
+  <select id="articleList" resultMap="ArticleMap"  parameterType="java.lang.String">
+  	select a.*,u.name
+  	from article a,user u
+  	where a.user_id = u.id and a.delete_flag=0
+  	<if test="_parameter != null" >
+      and u.name = #{person,jdbcType=VARCHAR}
+    </if>
+  </select>
+  
+  <select id="selectByPrimaryKey" resultMap="ArticleMap" parameterType="java.lang.Long" >
+    select a.*,u.name
+  	from article a,user u
+  	where a.user_id = u.id and a.delete_flag=0
+  	<if test="_parameter != null" >
+      and a.id = #{id}
+    </if>
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    update article
+    set delete_flag=1
+    where id = #{id}
+  </delete>
+  
+  <insert id="addArticle" parameterType="com.cn.beauty.entity.Article" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into article (title, abs, create_time,
+      user_id, delete_flag, content
+      )
+    values (#{title,jdbcType=VARCHAR}, #{abs,jdbcType=VARCHAR}, #{createTime,jdbcType=DATE}, 
+      #{userId,jdbcType=INTEGER}, #{deleteFlag,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  
+  <update id="editArticle" parameterType="com.cn.beauty.entity.Article" >
+    update article
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="abs != null" >
+        abs = #{abs,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=DATE},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+</mapper>

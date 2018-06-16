@@ -1,4 +1,4 @@
-package com.cn.netdisk.controller;
+package com.cn.beauty.controller;
 
 import java.net.URLEncoder;
 import java.util.UUID;
@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
-import com.cn.netdisk.entity.User;
-import com.cn.netdisk.service.UserService;
-import com.cn.netdisk.util.Md5;
-import com.cn.netdisk.util.ResultInfo;
+import com.cn.beauty.entity.User;
+import com.cn.beauty.service.UserService;
+import com.cn.beauty.util.Md5;
+import com.cn.beauty.util.ResultInfo;
 
 @Controller
 @RequestMapping("/user")
@@ -128,6 +128,33 @@ public class UserController {
 		}
 		redisTemplate.delete(redisUserInfo);
 		result.setCode(200);
+		return result;
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping("/getUserInfo")
+	public ResultInfo getUserInfo(HttpServletRequest request) {
+		ResultInfo result = new ResultInfo();
+		String user = "";
+		Long userId = null;
+		User u = null;
+		Cookie[] cookies = request.getCookies();
+		if (cookies != null) {
+			for (Cookie cookie : cookies) {
+				if (cookie.getName().equals("userInfo")) {
+					user = cookie.getValue();
+					break;
+				}
+			}
+		}
+		if(!"".equals(user)) {
+			String[] userArray = user.split("-");
+			userId = Long.parseLong(userArray[userArray.length-2]);
+			u = userService.getUserById(userId);
+		}
+		result.setCode(200);
+		result.setInfo(u);
 		return result;
 	}
 }

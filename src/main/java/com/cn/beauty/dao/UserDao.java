@@ -1,8 +1,8 @@
-package com.cn.netdisk.dao;
+package com.cn.beauty.dao;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.cn.netdisk.entity.User;
+import com.cn.beauty.entity.User;
 
 public interface UserDao {
 

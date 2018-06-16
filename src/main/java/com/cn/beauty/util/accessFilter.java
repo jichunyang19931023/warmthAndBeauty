@@ -1,4 +1,4 @@
-package com.cn.netdisk.util;
+package com.cn.beauty.util;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletResponse;

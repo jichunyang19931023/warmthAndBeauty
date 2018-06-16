@@ -1,4 +1,4 @@
-package com.cn.netdisk.controller;
+package com.cn.beauty.controller;
 
 import java.io.IOException;
 import java.util.Date;
@@ -16,12 +16,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.cn.netdisk.entity.Article;
-import com.cn.netdisk.service.ArticleService;
-import com.cn.netdisk.util.CommonUtil;
-import com.cn.netdisk.util.DateUtil;
-import com.cn.netdisk.util.QiniuCloudUtil;
-import com.cn.netdisk.util.ResultInfo;
+import com.cn.beauty.entity.Article;
+import com.cn.beauty.service.ArticleService;
+import com.cn.beauty.util.CommonUtil;
+import com.cn.beauty.util.DateUtil;
+import com.cn.beauty.util.QiniuCloudUtil;
+import com.cn.beauty.util.ResultInfo;
 
 @Controller
 @RequestMapping("/article")

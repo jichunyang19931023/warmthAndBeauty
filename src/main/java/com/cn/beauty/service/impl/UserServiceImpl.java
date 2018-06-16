@@ -1,12 +1,12 @@
-package com.cn.netdisk.service.impl;
+package com.cn.beauty.service.impl;
 
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.cn.netdisk.dao.UserDao;
-import com.cn.netdisk.entity.User;
-import com.cn.netdisk.service.UserService;
+import com.cn.beauty.dao.UserDao;
+import com.cn.beauty.entity.User;
+import com.cn.beauty.service.UserService;
 
 @Service("userService")  
 public class UserServiceImpl implements UserService {  

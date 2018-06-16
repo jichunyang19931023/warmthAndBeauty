@@ -1,6 +1,6 @@
-package com.cn.netdisk.service;
+package com.cn.beauty.service;
 
-import com.cn.netdisk.entity.User;
+import com.cn.beauty.entity.User;
 
 public interface UserService {  
     public User getUserById(Long userId);
